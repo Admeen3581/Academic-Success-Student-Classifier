@@ -1,6 +1,6 @@
 #IDE Files
 /.idea
-.venv
+/.venv
 /vscode
 
 #Secrets
