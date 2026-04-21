@@ -12,6 +12,7 @@ License: MIT - ALL RIGHTS RESERVED
 
 #Imports
 import os
+import shutil
 import subprocess
 import zipfile
 from dotenv import load_dotenv
@@ -82,3 +83,19 @@ def download_dataset():
         print(f"Cleaned up the ZIP file.")
     else:
         print(f"Could not find the downloaded zip file at {zip_path}. Check for typos in the dataset ID.")
+
+def delete_dataset():
+    """
+    Deletes the downloaded dataset directory and its contents.
+
+    This function checks if the `DOWNLOAD_DIR` exists. If it does, it iterates through
+    all files within the directory, removes them, and then removes the directory itself.
+    If the directory does not exist, it prints a message indicating that deletion is skipped.
+    """
+
+    if os.path.exists(DOWNLOAD_DIR):
+        print(f"Deleting dataset directory '{DOWNLOAD_DIR}'...")
+        shutil.rmtree(DOWNLOAD_DIR)
+        print(f"Deletion of dataset directory '{DOWNLOAD_DIR}' successful.")
+    else:
+        print(f"Dataset directory '{DOWNLOAD_DIR}' does not exist. Skipping deletion.")
