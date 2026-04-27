@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 
 #Constants
 DATASET_ID = 'playground-series-s4e6'
-DOWNLOAD_DIR = '../data/raw_csv'
+DOWNLOAD_DIR = './data/raw_csv'
 
 load_dotenv()
 subprocess_env = os.environ.copy()

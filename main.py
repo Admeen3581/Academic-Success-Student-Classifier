@@ -1,0 +1,35 @@
+"""
+main.py
+Description: Hello There :)
+
+Contributors:
+[
+    Adam Long <adam.jacob.long@gmail.com>
+]
+
+License: MIT - ALL RIGHTS RESERVED
+"""
+from controllers.data_receiver import *
+
+#Imports
+
+
+#Constants
+MODEL_PATH = "./model/car_classifier.pt"
+
+if __name__ == '__main__':
+    print("Hello There :)\nAcademic Success Classifier Ver.0.2\n\n\t---Initializing---\n\n")
+
+    download_dataset()
+
+    # dataset_init()
+    #
+    # if not os.path.exists(MODEL_PATH):
+    #     #Best model was trained via AWS: Nvidia L40S GPU w/ 8 CPU cores.
+    #     #25 epochs over 4 learning rate chunks off ResNet101 (see ModelTraining.py).
+    #     #Training with the above setup typically takes ~1 hour.
+    #     train_model(get_datasheet(), 4)
+    # else:
+    #     print("Model detected. Skipping training...")
+
+    #validate_model(get_datasheet("./data/anno_test_filtered.csv"), 4, MODEL_PATH)
