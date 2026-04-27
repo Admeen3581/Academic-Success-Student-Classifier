@@ -34,6 +34,8 @@ def download_dataset():
     and exits. Otherwise, it proceeds to download the dataset using the Kaggle CLI, extracts the contents
     of the downloaded zip file, and then removes the zip file to save disk space.
 
+    https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success
+
     Raises:
         subprocess.CalledProcessError: If the Kaggle CLI command fails.
         FileNotFoundError: If the 'kaggle' command is not found in the system's PATH.
@@ -83,6 +85,16 @@ def download_dataset():
         print(f"Cleaned up the ZIP file.")
     else:
         print(f"Could not find the downloaded zip file at {zip_path}. Check for typos in the dataset ID.")
+
+def clean_files():
+    DEAD_CSV_PATH = './data/raw_csv/sample_submission.csv'
+
+    if os.path.exists(DEAD_CSV_PATH):
+        print(f"Deleting dataset directory '{DEAD_CSV_PATH}'...")
+        shutil.rmtree(DEAD_CSV_PATH)
+        print(f"Deletion of dataset directory '{DEAD_CSV_PATH}' successful.")
+    else:
+        print(f"Dataset directory '{DEAD_CSV_PATH}' does not exist. Skipping deletion.")
 
 def delete_dataset():
     """

@@ -9,9 +9,9 @@ Contributors:
 
 License: MIT - ALL RIGHTS RESERVED
 """
-from controllers.data_receiver import *
 
 #Imports
+from controllers.data_receiver import *
 
 
 #Constants
