@@ -1,5 +1,5 @@
 """
-main.py
+clean_dataset.py
 Description: Cleans the dataset preserving key features & deleting NaN values.
 Data comes in as Label Encoding via Integer values.
 
