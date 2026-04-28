@@ -12,6 +12,7 @@ License: MIT - ALL RIGHTS RESERVED
 
 #Imports
 from controllers.data_receiver import *
+import controllers.clean_dataset
 
 
 #Constants
@@ -21,6 +22,7 @@ if __name__ == '__main__':
     print("Hello There :)\nAcademic Success Classifier Ver.0.2\n\n\t---Initializing---\n\n")
 
     download_dataset()
+    controllers.clean_dataset.fix_features()
 
     # dataset_init()
     #

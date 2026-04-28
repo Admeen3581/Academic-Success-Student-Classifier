@@ -25,40 +25,49 @@ def fix_features():
     '''
     dataframe_train = get_csv_data(frametype='train')
     dataframe_train.drop(
-        columns = ['id', 'Application_mode', 'Application_type'],
+        columns = ['id', 'Application mode', 'Application order'],
         inplace = True
     )
 
-    dataframe_train.rename(columns={
+    dataframe_train = dataframe_train.rename(columns={
         'Course' : 'Course Code',
         'Nacionality' : 'Nationality',
         'Displaced' : 'Relocated',
-        'Curricular units 1st sem (credited)' : 'Curricular units 1st sem (transferred)',
-        'Curricular units 2nd sem (credited)' : 'Curricular units 2nd sem (transferred)',
-        'Curricular units 1st sem (evaluations)' : 'Curricular units 1st sem (exams taken)',
-        'Curricular units 2nd sem (evaluations)' : 'Curricular units 2nd sem (exams taken)',
-        'Curricular units 1st sem (approved)' : 'Curricular units 1st sem (passed)',
-        'Curricular units 2nd sem (approved)' : 'Curricular units 2nd sem (passed)',
-        'Curricular units 1st sem (without evaluations)' : 'Curricular units 1st sem (skipped exams)',
-        'Curricular units 2nd sem (without evaluations)' : 'Curricular units 2nd sem (skipped exams)',
+        'Curricular units 1st sem (credited)' : 'Course Credit Sem1 (transferred)',
+        'Curricular units 2nd sem (credited)' : 'Course Credit Sem2 (transferred)',
+        'Curricular units 1st sem (evaluations)' : 'Course Credit Sem1 (exams taken)',
+        'Curricular units 2nd sem (evaluations)' : 'Course Credit Sem2 (exams taken)',
+        'Curricular units 1st sem (approved)' : 'Course Credit Sem1 (passed)',
+        'Curricular units 2nd sem (approved)' : 'Course Credit Sem2 (passed)',
+        'Curricular units 1st sem (without evaluations)' : 'Course Credit Sem1 (skipped exams)',
+        'Curricular units 2nd sem (without evaluations)' : 'Course Credit Sem2 (skipped exams)',
     })
+
+    #Save to file
+    os.makedirs('./data/processed_csv', exist_ok=True)
+    dataframe_train.to_csv('./data/processed_csv/train.csv', index=False)
 
     dataframe_test = get_csv_data(frametype='test')
     dataframe_test.drop(
-        columns = ['id', 'Application_mode', 'Application_type'],
+        columns = ['id', 'Application mode', 'Application order'],
         inplace = True
     )
 
-    dataframe_test.rename(columns={
-        'Course': 'Course Code',
-        'Nacionality': 'Nationality',
-        'Displaced': 'Relocated',
-        'Curricular units 1st sem (credited)': 'Curricular units 1st sem (transferred)',
-        'Curricular units 2nd sem (credited)': 'Curricular units 2nd sem (transferred)',
-        'Curricular units 1st sem (evaluations)': 'Curricular units 1st sem (exams taken)',
-        'Curricular units 2nd sem (evaluations)': 'Curricular units 2nd sem (exams taken)',
-        'Curricular units 1st sem (approved)': 'Curricular units 1st sem (passed)',
-        'Curricular units 2nd sem (approved)': 'Curricular units 2nd sem (passed)',
-        'Curricular units 1st sem (without evaluations)': 'Curricular units 1st sem (skipped exams)',
-        'Curricular units 2nd sem (without evaluations)': 'Curricular units 2nd sem (skipped exams)',
+    dataframe_test = dataframe_test.rename(columns={
+        'Course' : 'Course Code',
+        'Nacionality' : 'Nationality',
+        'Displaced' : 'Relocated',
+        'Curricular units 1st sem (credited)' : 'Course Credit Sem1 (transferred)',
+        'Curricular units 2nd sem (credited)' : 'Course Credit Sem2 (transferred)',
+        'Curricular units 1st sem (evaluations)' : 'Course Credit Sem1 (exams taken)',
+        'Curricular units 2nd sem (evaluations)' : 'Course Credit Sem2 (exams taken)',
+        'Curricular units 1st sem (approved)' : 'Course Credit Sem1 (passed)',
+        'Curricular units 2nd sem (approved)' : 'Course Credit Sem2 (passed)',
+        'Curricular units 1st sem (without evaluations)' : 'Course Credit Sem1 (skipped exams)',
+        'Curricular units 2nd sem (without evaluations)' : 'Course Credit Sem2 (skipped exams)',
     })
+
+    # Save to file
+    dataframe_test.to_csv('./data/processed_csv/test.csv', index=False)
+
+    print("Dataset cleaned successfully!")

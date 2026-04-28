@@ -41,6 +41,10 @@ def download_dataset():
         FileNotFoundError: If the 'kaggle' command is not found in the system's PATH.
     """
 
+    if os.path.exists(DOWNLOAD_DIR):
+        print(f"Dataset directory '{DOWNLOAD_DIR}' already exists. Skipping download.")
+        return
+
     # Construct the download command
     command_list = [
         'kaggle',

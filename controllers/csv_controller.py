@@ -20,4 +20,4 @@ def get_csv_data(frametype='train'):
     :param frametype: 'train' or 'test' depending on CSV data required. 'train' is default.
     :return: Pandas dataframe
     '''
-    return pd.read_csv(f'./data/raw_csv/{type}.csv')
+    return pd.read_csv(f'./data/raw_csv/{frametype}.csv')
