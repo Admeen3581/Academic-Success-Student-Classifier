@@ -14,10 +14,30 @@ License: MIT - ALL RIGHTS RESERVED
 import pandas as pd
 
 
-def get_csv_data(frametype='train'):
+def get_csv_data():
     '''
+    Returns the cleaned CSV data.
+
     :type frametype: str
-    :param frametype: 'train' or 'test' depending on CSV data required. 'train' is default.
-    :return: Pandas dataframe
+    :return: Pandas dataframe. First return is 'train.csv', second is 'test.csv'
+    :raises FileNotFoundError: if the dataset is not found.
     '''
-    return pd.read_csv(f'./data/raw_csv/{frametype}.csv')
+    try:
+        return pd.read_csv(f'./data/processed_csv/train.csv'), pd.read_csv(f'./data/processed_csv/test.csv')
+    except FileNotFoundError:
+        print("Dataset not found. Check 'controllers/clean_dataset.py/fix_features()'.")
+        exit(-1)
+
+def get_raw_csv_data():
+    '''
+    Gets raw CSV data.
+
+        :type frametype: str
+        :return: Pandas dataframe. First return is 'train.csv', second is 'test.csv'
+        :raises FileNotFoundError: if the dataset is not found.
+    '''
+    try:
+        return pd.read_csv(f'./data/raw_csv/train.csv'), pd.read_csv(f'./data/raw_csv/test.csv')
+    except FileNotFoundError:
+        print("Dataset not found. Ensure the dataset was downloaded via 'controllers/data_receiver.py'/download_dataset()'.")
+        exit(-1)
