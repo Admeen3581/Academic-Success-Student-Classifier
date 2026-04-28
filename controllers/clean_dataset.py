@@ -13,6 +13,10 @@ License: MIT - ALL RIGHTS RESERVED
 #Imports
 from controllers.data_receiver import *
 from controllers.csv_controller import *
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import os
+import numpy as np
 
 
 def fix_features():
@@ -23,7 +27,9 @@ def fix_features():
     Renames features to be more descriptive.
     :return:
     '''
-    dataframe_train = get_csv_data(frametype='train')
+    os.makedirs('./data/processed_csv', exist_ok=True)
+
+    dataframe_train, dataframe_test = get_csv_data()
     dataframe_train.drop(
         columns = ['id', 'Application mode', 'Application order'],
         inplace = True
@@ -44,10 +50,8 @@ def fix_features():
     })
 
     #Save to file
-    os.makedirs('./data/processed_csv', exist_ok=True)
     dataframe_train.to_csv('./data/processed_csv/train.csv', index=False)
 
-    dataframe_test = get_csv_data(frametype='test')
     dataframe_test.drop(
         columns = ['id', 'Application mode', 'Application order'],
         inplace = True
@@ -71,3 +75,27 @@ def fix_features():
     dataframe_test.to_csv('./data/processed_csv/test.csv', index=False)
 
     print("Dataset cleaned successfully!")
+
+def split_dataset():
+    '''
+    Split dataset from get_csv_data() into train, validate, and test sets.
+    :return X_train, y_train, X_validate, y_validate, X_test, y_test: Metrics describing the model.
+    '''
+
+    dataframe_train, _ = get_csv_data()
+
+    X = dataframe_train.drop(columns=['Target'])
+
+    y = dataframe_train['Target']
+
+    X_train, y_train, X_temp, y_temp = train_test_split(X, y, test_size=0.2)
+    X_validate, y_validate, X_test, y_test = train_test_split(X_temp, y_temp, test_size=0.5)
+
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_validate_scaled = scaler.fit_transform(X_validate)
+    X_test_scaled = scaler.fit_transform(X_test)
+
+    y_train = np.ravel(y_train)
+    y_validate = np.ravel(y_validate)
+    y_test = np.ravel(y_test)
