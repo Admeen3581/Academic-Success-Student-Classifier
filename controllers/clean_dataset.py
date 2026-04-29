@@ -99,3 +99,5 @@ def split_dataset():
     y_train = np.ravel(y_train)
     y_validate = np.ravel(y_validate)
     y_test = np.ravel(y_test)
+
+    return X_train_scaled, y_train, X_validate_scaled, y_validate, X_test_scaled, y_test
