@@ -1,6 +1,6 @@
 """
 csv_controller.py
-Description: Central controller for CSV files & data.
+Description: Central controller for CSV files & data. Test CSV's do not have output labels.
 
 Contributors:
 [
