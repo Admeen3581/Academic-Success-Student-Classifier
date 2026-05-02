@@ -19,13 +19,17 @@ import numpy as np
 
 
 def fix_features():
-    '''
+    """
     Removes features that have no meaning towards the goal of the model.
 
     Dropped features relate to application processes, which are not related to the outcome.
     Renames features to be more descriptive.
     :return:
-    '''
+    """
+    if os.path.exists('./data/processed_csv'):
+        print("Dataset already cleaned. If errors persist, delete the 'processed_csv' directory and try again.")
+        return
+
     os.makedirs('./data/processed_csv', exist_ok=True)
 
     dataframe_train, dataframe_test = get_csv_data()
@@ -76,10 +80,10 @@ def fix_features():
     print("Dataset cleaned successfully!")
 
 def get_split_dataset():
-    '''
+    """
     Split dataset from get_csv_data() into train, validate, and test sets.
     :return X_train, y_train, X_validate, y_validate, X_test, y_test: Metrics describing the model.
-    '''
+    """
 
     dataframe_train, _ = get_csv_data()
 
