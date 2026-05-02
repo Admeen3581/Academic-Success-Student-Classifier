@@ -32,9 +32,9 @@ def build_decision_model(folds=6) -> BaseEstimator:
     student_decision_model = DecisionTreeClassifier()
 
     param_grid = {
-        'criterion' : ['gini'],
-        'max_depth' : [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        'min_samples_split' : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        'criterion' : ['gini', 'entropy'],
+        'max_depth' : [5, 10, 15, 20, 25, 30, 100],
+        'min_samples_split' : [2, 4, 6, 8, 10]
     }
 
     best_model = train_model(student_decision_model, MODEL_NAME, param_grid, folds)

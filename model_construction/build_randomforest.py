@@ -32,9 +32,12 @@ def build_forest_model(folds=6) -> BaseEstimator:
     student_forest_model = RandomForestClassifier()
 
     param_grid = {
+        'criterion': ['gini'],
         'n_estimators': [10, 100, 250, 500, 1000, 2000, 5000],
         'max_features': ['sqrt', 'log2'],
-        'solver': ['svd', 'eigen']
+        'max_depth' : [5, 10, 15, 20, 25, 30, 100],
+        'min_samples_split' : [2, 4, 6, 8, 10],
+        'ccp_alpha' : [0, 0.001, 0.01, 0.1, 0.5, 1, 5, 10],
     }
 
     best_model = train_model(student_forest_model, MODEL_NAME, param_grid, folds)
