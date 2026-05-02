@@ -13,7 +13,8 @@ License: MIT - ALL RIGHTS RESERVED
 #Imports
 from controllers.data_receiver import *
 from controllers.logs.color_logs import *
-import controllers.clean_dataset
+from model_construction.build_knn import *
+from controllers.clean_dataset import fix_features
 
 
 #Constants
@@ -23,7 +24,9 @@ if __name__ == '__main__':
     print_blue("Hello There :)\nAcademic Success Classifier Ver.0.2\n\n\t---Initializing---\n\n")
 
     download_dataset()
-    controllers.clean_dataset.fix_features()
+    fix_features()
+
+    build_knn_model()
 
     # dataset_init()
     #
