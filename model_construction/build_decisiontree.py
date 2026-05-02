@@ -15,7 +15,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 from model_construction.model_constructor import train_model
 
-def build_lda_model(folds=6) -> BaseEstimator:
+def build_decision_model(folds=6) -> BaseEstimator:
     """
     Builds and trains a Decision Tree model.
 
@@ -24,7 +24,7 @@ def build_lda_model(folds=6) -> BaseEstimator:
 
     :param folds: Number of folds for cross-validation, default is 6.
     :type folds: int
-    :return: Tuned LDA model after cross-validation.
+    :return: Tuned Decision Tree model after cross-validation.
     :rtype: Any
     """
 
