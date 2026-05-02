@@ -11,7 +11,6 @@ Contributors:
 License: MIT - ALL RIGHTS RESERVED
 """
 #Imports
-from controllers.data_receiver import *
 from controllers.csv_controller import *
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -76,7 +75,7 @@ def fix_features():
 
     print("Dataset cleaned successfully!")
 
-def split_dataset():
+def get_split_dataset():
     '''
     Split dataset from get_csv_data() into train, validate, and test sets.
     :return X_train, y_train, X_validate, y_validate, X_test, y_test: Metrics describing the model.
@@ -101,3 +100,25 @@ def split_dataset():
     y_test = np.ravel(y_test)
 
     return X_train_scaled, y_train, X_validate_scaled, y_validate, X_test_scaled, y_test
+
+def get_unsplit_dataset():
+    """
+    Obtains the dataset without splitting it, returning features and target variables.
+
+    This function loads the training data using the `get_csv_data` function, separates
+    features and target from the dataset, and then formats it for further usage.
+
+    :return: A tuple containing the feature matrix and the flattened target array.
+    :rtype: Tuple[pd.DataFrame, np.ndarray]
+    """
+
+    dataframe_train, _ = get_csv_data()
+
+    X = dataframe_train.drop(columns=['Target'])
+
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    y = dataframe_train['Target']
+
+    return X_scaled, np.ravel(y)
