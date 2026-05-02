@@ -16,8 +16,17 @@ from sklearn.model_selection import GridSearchCV
 import pandas as pd
 
 
-def build_knn_model():
+def build_knn_model(folds=6):
+    """
+    This function builds and tunes a K-Nearest Neighbors (KNN) classification model
+    using cross-validation and grid search. It leverages GridSearchCV for parameter
+    optimization and evaluates the model performance on a given dataset.
 
+    :raises ValueError: If the dataset for training has issues or is not suitable.
+    :raises Exception: For unexpected issues during model training and validation steps.
+    :param folds: Determines cross-validation folds. (Default: 6)
+    :return pkl_model: The trained KNN model.
+    """
 
     student_knn_model = KNeighborsClassifier()
 
@@ -28,7 +37,7 @@ def build_knn_model():
 
     #6-Fold Cross Validation
     print("\n--- Performing KNN Model Execution... ---\n")
-    grid_search = GridSearchCV(student_knn_model, param_grid, cv=6, scoring='accuracy', verbose=3, refit=True)
+    grid_search = GridSearchCV(student_knn_model, param_grid, cv=folds, scoring='accuracy', verbose=3, refit=True)
 
     #Fit the search
     grid_search.fit(X_dataset, y_dataset)
@@ -43,6 +52,17 @@ def build_knn_model():
     return best_knn_model
 
 def knn_model_result(results_df : pd.DataFrame):
+    """
+    Logs and saves K-Nearest Neighbors (KNN) model cross-validation results.
+
+    :param results_df:
+        A pandas DataFrame containing the cross-validation results for the KNN model.
+        The DataFrame must include columns such as 'params', 'mean_test_score',
+        'std_test_score', 'rank_test_score', and any 'split' results from the model
+        training process. This is given with 'grid_search.cv_results_'
+    :return:
+        None
+    """
 
     log_columns = ['params', 'mean_test_score', 'std_test_score', 'rank_test_score']
     log_columns.extend([col for col in results_df.columns if 'split' in col])
