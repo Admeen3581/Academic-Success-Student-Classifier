@@ -12,6 +12,7 @@ License: MIT - ALL RIGHTS RESERVED
 
 #Imports
 from controllers.data_receiver import *
+from controllers.logs.color_logs import *
 import controllers.clean_dataset
 
 
@@ -19,7 +20,7 @@ import controllers.clean_dataset
 MODEL_PATH = "./model/car_classifier.pt"
 
 if __name__ == '__main__':
-    print("Hello There :)\nAcademic Success Classifier Ver.0.2\n\n\t---Initializing---\n\n")
+    print_blue("Hello There :)\nAcademic Success Classifier Ver.0.2\n\n\t---Initializing---\n\n")
 
     download_dataset()
     controllers.clean_dataset.fix_features()

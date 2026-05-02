@@ -27,7 +27,8 @@ def fix_features():
     :return:
     """
     if os.path.exists('./data/processed_csv'):
-        print("Dataset already cleaned. If errors persist, delete the 'processed_csv' directory and try again.")
+        print("Dataset already cleaned. Skipping Cleaning.")
+        print_warning("If you experience issues, delete the directory and try again.")
         return
 
     os.makedirs('./data/processed_csv', exist_ok=True)
@@ -77,7 +78,7 @@ def fix_features():
     # Save to file
     dataframe_test.to_csv('./data/processed_csv/test.csv', index=False)
 
-    print("Dataset cleaned successfully!")
+    print_succ("Dataset cleaned successfully!")
 
 def get_split_dataset():
     """

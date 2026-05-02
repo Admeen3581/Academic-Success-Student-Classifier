@@ -12,6 +12,7 @@ License: MIT - ALL RIGHTS RESERVED
 
 #Imports
 import pandas as pd
+from controllers.logs.color_logs import *
 
 
 def get_csv_data():
@@ -25,7 +26,7 @@ def get_csv_data():
     try:
         return pd.read_csv(f'./data/processed_csv/train.csv'), pd.read_csv(f'./data/processed_csv/test.csv')
     except FileNotFoundError:
-        print("Dataset not found. Check 'controllers/clean_dataset.py/fix_features()'.")
+        print_error("Dataset not found. Check 'controllers/clean_dataset.py/fix_features()'.")
         exit(-1)
 
 def get_raw_csv_data():
@@ -39,5 +40,5 @@ def get_raw_csv_data():
     try:
         return pd.read_csv(f'./data/raw_csv/train.csv'), pd.read_csv(f'./data/raw_csv/test.csv')
     except FileNotFoundError:
-        print("Dataset not found. Ensure the dataset was downloaded via 'controllers/data_receiver.py'/download_dataset()'.")
+        print_error("Dataset not found. Ensure the dataset was downloaded via 'controllers/data_receiver.py'/download_dataset()'.")
         exit(-1)

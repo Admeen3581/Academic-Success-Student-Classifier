@@ -16,6 +16,7 @@ import shutil
 import subprocess
 import zipfile
 from dotenv import load_dotenv
+from controllers.logs.color_logs import *
 
 #Constants
 DATASET_ID = 'playground-series-s4e6'
@@ -43,6 +44,7 @@ def download_dataset():
 
     if os.path.exists(DOWNLOAD_DIR):
         print(f"Dataset directory '{DOWNLOAD_DIR}' already exists. Skipping download.")
+        print_warning("If you experience issues, delete the directory and try again.")
         return
 
     # Construct the download command
@@ -63,13 +65,13 @@ def download_dataset():
             check=True,
             env=subprocess_env
         )
-        print(f"Dataset {DATASET_ID} downloaded to {DOWNLOAD_DIR} successfully!")
+        print_succ(f"Dataset {DATASET_ID} downloaded to {DOWNLOAD_DIR} successfully!")
 
     except subprocess.CalledProcessError as e:
-        print(f"Error executing command: {e}")
+        print_error(f"Error executing command: {e}")
 
     except FileNotFoundError:
-        print("Error: 'kaggle' command not found. Ensure the Kaggle CLI is installed and in your PATH.")
+        print_error("Error: 'kaggle' command not found. Ensure the Kaggle CLI is installed and in your PATH.")
 
     #Zip constants
     zip_filename = DATASET_ID.split('/')[-1] + '.zip'
@@ -88,7 +90,7 @@ def download_dataset():
         os.remove(zip_path)
         print(f"Cleaned up the ZIP file.")
     else:
-        print(f"Could not find the downloaded zip file at {zip_path}. Check for typos in the dataset ID.")
+        print_error(f"Could not find the downloaded zip file at {zip_path}. Check for typos in the dataset ID.")
 
 def clean_files():
     DEAD_CSV_PATH = './data/raw_csv/sample_submission.csv'
