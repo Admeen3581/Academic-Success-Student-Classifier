@@ -10,37 +10,29 @@ Contributors:
 License: MIT - ALL RIGHTS RESERVED
 """
 #Imports
+from sklearn.base import BaseEstimator
 from sklearn.linear_model import LogisticRegression
-from controllers.clean_dataset import *
-from sklearn.model_selection import GridSearchCV
-from model_construction.model_results import *
-import pandas as pd
+from model_construction.model_constructor import train_model
 
 
-def build_logistic_model(folds=6):
+def build_logistic_model(folds=6) -> BaseEstimator:
+    """
+    Builds and returns a logistic regression model optimized using the specified number of
+    folds for cross-validation.
+
+    :param folds: Number of folds for cross-validation. Default is 6.
+    :type folds: int
+    :return: The best logistic regression model after training.
+    :rtype: LogisticRegression
+    """
 
     MODEL_NAME = "Logistic_Regression"
 
     student_logistic_model = LogisticRegression()
 
-    X_dataset, y_dataset = get_unsplit_dataset()
+    # single parameter needed.
+    param_grid = {'solver': ['saga']}
 
-    #GridSearch is used because the sklearn cross_validation function doesn't return a complete model.
-    param_grid = {'solver': ['saga']}#single parameter needed.
-
-    #6-Fold Cross Validation
-    print(f"\n--- Performing {MODEL_NAME} Model Execution... ---\n")
-    grid_search = GridSearchCV(student_logistic_model, param_grid, cv=folds, scoring='accuracy', verbose=3, refit=True)
-
-    #Fit the search
-    grid_search.fit(X_dataset, y_dataset)
-
-    best_model = grid_search.best_estimator_
-
-    print("\n")
-    log_model_result(pd.DataFrame(grid_search.cv_results_), MODEL_NAME)
-    log_to_ranking_list(MODEL_NAME, grid_search.best_params_, grid_search.best_score_)
-
-    print_succ(f"Best Average Score: {grid_search.best_score_}")
+    best_model = train_model(student_logistic_model, MODEL_NAME, param_grid, folds)
 
     return best_model
