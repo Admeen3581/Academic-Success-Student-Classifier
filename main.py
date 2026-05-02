@@ -9,10 +9,10 @@ Contributors:
 
 License: MIT - ALL RIGHTS RESERVED
 """
-
 #Imports
 from controllers.data_receiver import *
 from controllers.logs.color_logs import *
+from model_construction.build_logisticregression import *
 from model_construction.build_knn import *
 from controllers.clean_dataset import fix_features
 
@@ -27,6 +27,7 @@ if __name__ == '__main__':
     fix_features()
 
     build_knn_model()
+    build_logistic_model()
 
     # dataset_init()
     #
