@@ -52,6 +52,6 @@ def train_model(model : BaseEstimator, model_name : str, param_grid : dict, fold
     log_model_result(pd.DataFrame(grid_search.cv_results_), model_name)
     log_to_ranking_list(model_name, grid_search.best_params_, grid_search.best_score_)
 
-    print_succ(f"Best Average Score: {grid_search.best_score_}")
+    print_succ(f"Best Average Score: {grid_search.best_score_:.5f}")
 
     return best_model
