@@ -28,11 +28,11 @@ def build_gaussian_model(folds=6) -> BaseEstimator:
 
     MODEL_NAME = "Gaussian_Bayes"
 
-    student_knn_model = GaussianNB()
+    student_gaussian_model = GaussianNB()
 
     #empty intentionally, Bayes doesn't have hyperparameters.
     param_grid = {}
 
-    best_model = train_model(student_knn_model, MODEL_NAME, param_grid, folds)
+    best_model = train_model(student_gaussian_model, MODEL_NAME, param_grid, folds)
 
     return best_model

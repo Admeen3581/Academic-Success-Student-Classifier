@@ -29,11 +29,11 @@ def build_lda_model(folds=6) -> BaseEstimator:
 
     MODEL_NAME = "Linear_Discriminant_Analysis"
 
-    student_knn_model = LinearDiscriminantAnalysis()
+    student_lda_model = LinearDiscriminantAnalysis()
 
     #Different solvers are available. Which is fastest?
     param_grid = {'solver' : ['svd', 'lsqr', 'eigen']}
 
-    best_model = train_model(student_knn_model, MODEL_NAME, param_grid, folds)
+    best_model = train_model(student_lda_model, MODEL_NAME, param_grid, folds)
 
     return best_model
