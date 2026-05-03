@@ -37,7 +37,7 @@ def build_forest_model(folds=6) -> BaseEstimator:
     param_grid = {
         'max_depth' : [5, 8, 10, 12, 15],
         'min_samples_split' : [5, 10, 15, 50, 75, 100],#doesn't affect greatly unlike original tree
-        'ccp_alpha' : [0.0001, 0.001, 0.01],#anything >0.1 accuracy drops below 70%
+        'ccp_alpha' : [0.00001, 0.0001, 0.001, 0.01],#anything >0.1 accuracy drops below 70%
     }
 
     best_model = train_model(student_forest_model, MODEL_NAME, param_grid, folds)
