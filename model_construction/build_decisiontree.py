@@ -33,8 +33,8 @@ def build_decision_model(folds=6) -> BaseEstimator:
 
     param_grid = {
         'criterion' : ['gini', 'entropy'],
-        'max_depth' : [3, 4, 5, 10, 25, 100],
-        'min_samples_split' : [3, 10, 15, 20, 30, 40, 50]
+        'max_depth' : [5, 8, 10, 12, 15, 25, 100],
+        'min_samples_split' : [10, 20, 40, 60, 80, 100],
     }
 
     best_model = train_model(student_decision_model, MODEL_NAME, param_grid, folds)

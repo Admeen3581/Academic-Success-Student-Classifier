@@ -31,7 +31,7 @@ def build_knn_model(folds=6) -> BaseEstimator:
 
     student_knn_model = KNeighborsClassifier()
 
-    param_grid = {'n_neighbors': [5, 10, 20, 30, 40, 50, 200]}
+    param_grid = {'n_neighbors': [5, 10, 20, 30, 40, 50, 250]}
 
     best_model = train_model(student_knn_model, MODEL_NAME, param_grid, folds)
 
