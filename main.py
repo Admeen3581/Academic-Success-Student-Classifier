@@ -19,9 +19,11 @@ from model_construction.build_logisticregression import *
 from model_construction.build_knn import *
 from controllers.clean_dataset import fix_features
 from model_construction.build_randomforest import build_forest_model
+from model_predict.kaggle_bonus import run_test
+import joblib
 
 #Constants
-MODEL_PATH = "./model/car_classifier.pt"
+MODEL_PATH = "./model/student_success_model.pkl"
 
 if __name__ == '__main__':
     print_blue("Hello There :)\nAcademic Success Classifier Ver.0.2\n\n\t---Initializing---\n\n")
@@ -29,21 +31,14 @@ if __name__ == '__main__':
     download_dataset()
     fix_features()
 
-    build_knn_model()
-    build_logistic_model()
-    build_gaussian_model()
-    build_lda_model()
-    build_decision_model(folds=5)
-    build_forest_model(folds=5)
+    # build_knn_model()
+    # build_logistic_model()
+    # build_gaussian_model()
+    # build_lda_model()
+    # build_decision_model(folds=5)
+    best_model = build_forest_model(folds=5)
 
-    # dataset_init()
-    #
-    # if not os.path.exists(MODEL_PATH):
-    #     #Best model was trained via AWS: Nvidia L40S GPU w/ 8 CPU cores.
-    #     #25 epochs over 4 learning rate chunks off ResNet101 (see ModelTraining.py).
-    #     #Training with the above setup typically takes ~1 hour.
-    #     train_model(get_datasheet(), 4)
-    # else:
-    #     print("Model detected. Skipping training...")
+    joblib.dump(best_model, MODEL_PATH)
 
-    #validate_model(get_datasheet("./data/anno_test_filtered.csv"), 4, MODEL_PATH)
+    #Kaggle Bonus
+    run_test()

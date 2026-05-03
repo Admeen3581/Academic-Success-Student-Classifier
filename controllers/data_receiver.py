@@ -92,6 +92,8 @@ def download_dataset():
     else:
         print_error(f"Could not find the downloaded zip file at {zip_path}. Check for typos in the dataset ID.")
 
+    os.makedirs('./model', exist_ok=True)
+
 def clean_files():
     DEAD_CSV_PATH = './data/raw_csv/sample_submission.csv'
 
