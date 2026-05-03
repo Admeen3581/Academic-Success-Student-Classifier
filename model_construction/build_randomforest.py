@@ -33,11 +33,11 @@ def build_forest_model(folds=6) -> BaseEstimator:
 
     param_grid = {
         'criterion': ['gini'],
-        'n_estimators': [10, 100, 250, 500], #over 500 estimators is time consuming
         'max_features': ['sqrt', 'log2'],
         'max_depth' : [3, 4, 5, 10, 20, 100],
         'min_samples_split' : [3, 6, 9, 12, 15],
-        'ccp_alpha' : [0.001, 0.01, 0.1, 0.5, 1, 5, 10],
+        'ccp_alpha' : [0.001, 0.01, 0.1, 0.5, 1, 5],
+        'n_estimators': [10, 25, 100],  # over 100 estimators is time consuming
     }
 
     best_model = train_model(student_forest_model, MODEL_NAME, param_grid, folds)
