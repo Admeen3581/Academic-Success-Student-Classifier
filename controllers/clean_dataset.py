@@ -15,6 +15,7 @@ from controllers.csv_controller import *
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import os
+import joblib
 import numpy as np
 
 
@@ -33,7 +34,7 @@ def fix_features():
 
     os.makedirs('./data/processed_csv', exist_ok=True)
 
-    dataframe_train, dataframe_test = get_csv_data()
+    dataframe_train, dataframe_test = get_raw_csv_data()
     dataframe_train.drop(
         columns = ['id', 'Application mode', 'Application order'],
         inplace = True
@@ -108,22 +109,21 @@ def get_split_dataset():
 
 def get_unsplit_dataset():
     """
-    Obtains the dataset without splitting it, returning features and target variables.
+    Loads, processes dataset, and returns scaled features and target data for training.
 
-    This function loads the training data using the `get_csv_data` function, separates
-    features and target from the dataset, and then formats it for further usage.
-
-    :return: A tuple containing the feature matrix and the flattened target array.
-    :rtype: Tuple[pd.DataFrame, np.ndarray]
+    :return: Tuple containing scaled training features and flattened target values.
+    :rtype: Tuple[np.ndarray, np.ndarray]
     """
 
     dataframe_train, _ = get_csv_data()
 
-    X = dataframe_train.drop(columns=['Target'])
+    X_train = dataframe_train.drop(columns=['Target'])
 
     scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
+    X_scaled_train = scaler.fit_transform(X_train)
 
     y = dataframe_train['Target']
 
-    return X_scaled, np.ravel(y)
+    joblib.dump(scaler, './model/my_scaler.pkl')
+
+    return X_scaled_train, np.ravel(y)
