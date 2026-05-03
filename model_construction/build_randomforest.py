@@ -29,15 +29,14 @@ def build_forest_model(folds=6) -> BaseEstimator:
 
     MODEL_NAME = "Random_Forest"
 
-    student_forest_model = RandomForestClassifier()
+    student_forest_model = RandomForestClassifier(max_features='sqrt', n_estimators=25, criterion='gini')
+    # over 100 estimators is time consuming. No payoff. Shows no change in results.
+    # max_features = sqrt is better due to less diminishing returns.
 
     param_grid = {
-        'criterion': ['gini'],
-        'max_features': ['sqrt', 'log2'],
-        'max_depth' : [5, 8, 10, 12, 15, 25],
-        'min_samples_split' : [10, 20, 40, 60, 80, 100],
+        'max_depth' : [5, 8, 10, 12, 15, 50],
+        'min_samples_split' : [10, 50, 75, 100, 250, 500],
         'ccp_alpha' : [0.001, 0.01, 0.1, 0.5, 1, 5],
-        'n_estimators': [25],  # over 100 estimators is time consuming. No payoff
     }
 
     best_model = train_model(student_forest_model, MODEL_NAME, param_grid, folds)
