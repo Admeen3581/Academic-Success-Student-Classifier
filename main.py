@@ -12,10 +12,13 @@ License: MIT - ALL RIGHTS RESERVED
 #Imports
 from controllers.data_receiver import *
 from controllers.logs.color_logs import *
+from model_construction.build_decisiontree import build_decision_model
+from model_construction.build_gaussianbayes import build_gaussian_model
+from model_construction.build_lineardiscriminant import build_lda_model
 from model_construction.build_logisticregression import *
 from model_construction.build_knn import *
 from controllers.clean_dataset import fix_features
-
+from model_construction.build_randomforest import build_forest_model
 
 #Constants
 MODEL_PATH = "./model/car_classifier.pt"
@@ -28,6 +31,10 @@ if __name__ == '__main__':
 
     build_knn_model()
     build_logistic_model()
+    build_gaussian_model()
+    build_lda_model()
+    build_decision_model(folds=5)
+    build_forest_model(folds=5)
 
     # dataset_init()
     #
