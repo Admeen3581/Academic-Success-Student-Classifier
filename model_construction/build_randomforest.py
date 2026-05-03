@@ -33,10 +33,11 @@ def build_forest_model(folds=6) -> BaseEstimator:
     # over 100 estimators is time consuming. No payoff. Shows no change in results.
     # max_features = sqrt is better due to less diminishing returns.
 
+    #grid is based on results from decision tree runs.
     param_grid = {
-        'max_depth' : [5, 8, 10, 12, 15, 50],
-        'min_samples_split' : [10, 50, 75, 100, 250, 500],
-        'ccp_alpha' : [0.001, 0.01, 0.1, 0.5, 1, 5],
+        'max_depth' : [5, 8, 10, 12, 15],
+        'min_samples_split' : [5, 10, 15, 50, 75, 100, 500],
+        'ccp_alpha' : [0.0001, 0.001, 0.01, 0.1],#anything >0.1 accuracy drops below 70%
     }
 
     best_model = train_model(student_forest_model, MODEL_NAME, param_grid, folds)
