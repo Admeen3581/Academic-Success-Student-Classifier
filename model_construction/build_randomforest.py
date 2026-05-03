@@ -29,7 +29,7 @@ def build_forest_model(folds=6) -> BaseEstimator:
 
     MODEL_NAME = "Random_Forest"
 
-    student_forest_model = RandomForestClassifier(max_features='sqrt', n_estimators=25, criterion='gini')
+    student_forest_model = RandomForestClassifier(max_features='sqrt', n_estimators=25, criterion='entropy')
     # over 100 estimators is time consuming. No payoff. Shows no change in results.
     # max_features = sqrt is better due to less diminishing returns.
 
