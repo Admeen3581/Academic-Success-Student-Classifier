@@ -33,7 +33,7 @@ def build_decision_model(folds=6) -> BaseEstimator:
 
     param_grid = {
         'criterion' : ['gini', 'entropy'],
-        'max_depth' : [5, 10, 15, 20, 25, 30, 100],
+        'max_depth' : [3, 4, 5, 10, 25, 100],
         'min_samples_split' : [3, 6, 9, 12, 15]
     }
 
