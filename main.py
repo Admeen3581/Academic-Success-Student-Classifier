@@ -31,14 +31,15 @@ if __name__ == '__main__':
     download_dataset()
     fix_features()
 
-    # build_knn_model()
-    # build_logistic_model()
-    # build_gaussian_model()
-    # build_lda_model()
-    # build_decision_model(folds=5)
+    build_knn_model()
+    build_logistic_model()
+    build_gaussian_model()
+    build_lda_model()
+    build_decision_model(folds=5)
     best_model = build_forest_model(folds=5)
 
     joblib.dump(best_model, MODEL_PATH)
 
-    #Kaggle Bonus
+    #Kaggle Bonus -- Top 2,000 competitors
+    #https://www.kaggle.com/competitions/playground-series-s4e6/overview
     run_test()
